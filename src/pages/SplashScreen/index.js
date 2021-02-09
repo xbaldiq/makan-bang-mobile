@@ -1,13 +1,20 @@
 import React from 'react';
+import {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Logo} from '../../assets';
 
-const SplashScreen = () => {
+const SplashScreen = ({navigation}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.replace('SignIn');
+    }, 1500);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Logo />
       <View style={{height: 20}} />
-      <Text style={styles.appName}> FoodMarket </Text>
+      <Text style={styles.appName}> Makan Bang </Text>
     </View>
   );
 };
@@ -23,5 +30,6 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: 32,
     color: '#020202',
+    fontFamily: 'Poppins-Medium',
   },
 });
