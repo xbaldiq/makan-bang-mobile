@@ -11,6 +11,7 @@ import {
   Home,
   Profile,
   Order,
+  FoodDetail,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -27,43 +28,51 @@ const MainApp = () => {
   );
 };
 
-const Auth = () => {
-  <Stack.Navigator>
-    <Stack.Screen
-      name="SplashScreen"
-      component={SplashScreen}
-      options={{headerShown: false}}
-    />
-    <Stack.Screen
-      name="SignIn"
-      component={SignIn}
-      options={{headerShown: false}}
-    />
-    <Stack.Screen
-      name="SignUp"
-      component={SignUp}
-      options={{headerShown: false}}
-    />
-    <Stack.Screen
-      name="SignUpAddress"
-      component={SignUpAddress}
-      options={{headerShown: false}}
-    />
-    <Stack.Screen
-      name="SignUpSuccess"
-      component={SignUpSuccess}
-      options={{headerShown: false}}
-    />
-    <Stack.Screen
-      name="MainApp"
-      component={MainApp}
-      options={{headerShown: false}}
-    />
-  </Stack.Navigator>;
+const MainRouter = () => {
+  return (
+    <Stack.Navigator>
+      {/* <Stack.Screen
+        name="SplashScreen"
+        component={SplashScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignUpAddress"
+        component={SignUpAddress}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignUpSuccess"
+        component={SignUpSuccess}
+        options={{headerShown: false}}
+      /> */}
+      <Stack.Screen
+        name="MainApp"
+        component={MainApp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="FoodDetail"
+        component={FoodDetail}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
 };
 
 const Router = () => {
-  return <MainApp />;
+  // return <MainApp />;
+  return <MainRouter />;
 };
 
 export default Router;
