@@ -7,123 +7,70 @@ import {RNText} from '../../atoms';
 import ItemListFood from '../ItemListFood';
 import {useNavigation} from '@react-navigation/native';
 
-const HomeTabSection = () => {
+const OrderTabSection = () => {
   // Tab NewTaste
-  const NewTaste = () => {
+  const InProgress = () => {
     const navigation = useNavigation();
     return (
       <View style={{paddingTop: 8, paddingHorizontal: 24}}>
         <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
           image={FoodDummy1}
           onPress={() => navigation.navigate('FoodDetail')}
+          items={3}
+          price="750.000"
+          type="in-progress"
+          name="soto lamongan"
         />
         <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
           image={FoodDummy2}
           onPress={() => navigation.navigate('FoodDetail')}
+          items={3}
+          price="750.000"
+          type="in-progress"
+          name="soto lamongan"
         />
         <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
           image={FoodDummy3}
           onPress={() => navigation.navigate('FoodDetail')}
+          items={3}
+          price="750.000"
+          type="in-progress"
+          name="soto lamongan"
         />
         <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
           image={FoodDummy4}
           onPress={() => navigation.navigate('FoodDetail')}
+          items={3}
+          price="750.000"
+          type="in-progress"
+          name="soto lamongan"
         />
       </View>
     );
   };
 
-  const Popular = () => {
+  const PastOrders = () => {
     const navigation = useNavigation();
     return (
       <View style={{paddingTop: 8, paddingHorizontal: 24}}>
         <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
           image={FoodDummy4}
           onPress={() => navigation.navigate('FoodDetail')}
+          items={3}
+          price="750.000"
+          type="past-orders"
+          name="soto lamongan"
+          date="Jun 12, 14:00"
         />
         <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
           image={FoodDummy3}
           onPress={() => navigation.navigate('FoodDetail')}
-        />
-        <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
-          image={FoodDummy2}
-          onPress={() => navigation.navigate('FoodDetail')}
-        />
-        <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
-          image={FoodDummy1}
-          onPress={() => navigation.navigate('FoodDetail')}
-        />
-      </View>
-    );
-  };
-
-  const Recommended = () => {
-    const navigation = useNavigation();
-    return (
-      <View style={{paddingTop: 8, paddingHorizontal: 24}}>
-        <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
-          image={FoodDummy3}
-          onPress={() => navigation.navigate('FoodDetail')}
-        />
-        <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
-          image={FoodDummy2}
-          onPress={() => navigation.navigate('FoodDetail')}
-        />
-        <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
-          image={FoodDummy1}
-          onPress={() => navigation.navigate('FoodDetail')}
-        />
-        <ItemListFood
-          type="product"
-          name="Nasi Goreng"
-          price="77.000"
-          rating={5}
-          image={FoodDummy4}
-          onPress={() => navigation.navigate('FoodDetail')}
+          items={3}
+          price="750.000"
+          type="past-orders"
+          name="soto lamongan"
+          date="Jun 12, 14:00"
+          status="Cancelled"
         />
       </View>
     );
@@ -160,15 +107,13 @@ const HomeTabSection = () => {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: '1', title: 'New Taste'},
-    {key: '2', title: 'Popular'},
-    {key: '3', title: 'Recommended'},
+    {key: '1', title: 'In Progress'},
+    {key: '2', title: 'Past Orders'},
   ]);
 
   const renderScene = SceneMap({
-    1: NewTaste,
-    2: Popular,
-    3: Recommended,
+    1: InProgress,
+    2: PastOrders,
   });
   return (
     <TabView
@@ -182,6 +127,6 @@ const HomeTabSection = () => {
   );
 };
 
-export default HomeTabSection;
+export default OrderTabSection;
 
 const styles = StyleSheet.create({});

@@ -3,11 +3,11 @@ import {StyleSheet, View, Text} from 'react-native';
 // import {Number} from '..';
 import {IcStarOff, IcStarOn} from '../../../assets';
 
-const Rating = ({number}) => {
+const Rating = ({rating}) => {
   const renderStar = () => {
     let star = [];
     for (let i = 1; i <= 5; i++) {
-      if (i <= number) {
+      if (i <= rating) {
         star.push(<IcStarOn key={i} />);
       } else {
         star.push(<IcStarOff key={i} />);
@@ -18,8 +18,6 @@ const Rating = ({number}) => {
   return (
     <View style={styles.ratingContainer}>
       <Text>Rating</Text>
-      {/* <View style={styles.startContainer}>{renderStar()}</View> */}
-      {/* <Number number={number} type="decimal" style={styles.numberRating} /> */}
     </View>
   );
 };

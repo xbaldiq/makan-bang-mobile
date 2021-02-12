@@ -13,19 +13,98 @@ import {Colors} from '../../../styles';
 import {RNText} from '../../atoms';
 import Rating from '../Rating';
 
-const ItemListFood = ({image = FoodDummy1, onPress, items, rating}) => {
+/**
+ Type:
+ 1.product
+ 2. order-summary
+ 3. in-progress
+ 4. past-orders 
+ */
+
+const ItemListFood = ({
+  image = FoodDummy1,
+  onPress,
+  items,
+  rating,
+  price = '50rb',
+  type,
+  name = 'bumil placholder',
+  date,
+  status,
+}) => {
+  const renderContent = (type) => {
+    switch (type) {
+      case 'product':
+        return (
+          <>
+            <View style={styles.content}>
+              <RNText size={16}>{name}</RNText>
+              <RNText size={13} style={{color: Colors.gray}}>
+                IDR {price}
+              </RNText>
+            </View>
+            <Rating rating={rating} />
+          </>
+        );
+      case 'order-summary':
+        return (
+          <>
+            <View style={styles.content}>
+              <RNText size={16}>{name}</RNText>
+              <RNText size={13} style={{color: Colors.gray}}>
+                IDR {price}
+              </RNText>
+            </View>
+            <RNText>{items} items</RNText>
+          </>
+        );
+      case 'in-progress':
+        return (
+          <>
+            <View style={styles.content}>
+              <RNText size={16}>{name}</RNText>
+              <RNText size={13} style={{color: Colors.gray}}>
+                {items} items . IDR {price}
+              </RNText>
+            </View>
+          </>
+        );
+      case 'past-orders':
+        return (
+          <>
+            <View style={styles.content}>
+              <RNText size={16}>{name}</RNText>
+              <RNText size={13} style={{color: Colors.gray}}>
+                {items} items . IDR {price}
+              </RNText>
+            </View>
+            <View>
+              <RNText style={styles.date}>{date}</RNText>
+              <RNText style={styles.status}>{status}</RNText>
+            </View>
+          </>
+        );
+
+      default:
+        return (
+          <>
+            <View style={styles.content}>
+              <RNText size={16}>{name}</RNText>
+              <RNText size={13} style={{color: Colors.gray}}>
+                IDR {price}
+              </RNText>
+            </View>
+            <Rating />
+          </>
+        );
+    }
+  };
+
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
       <View style={styles.container}>
         <Image source={image} style={styles.image} />
-        <View style={styles.content}>
-          <RNText size={16}>Soup Bumil</RNText>
-          <RNText size={13} style={{color: Colors.gray}}>
-            IDR 5000
-          </RNText>
-        </View>
-        {items && <RNText>{items} items</RNText>}
-        {rating && <Rating />}
+        {renderContent(type)}
       </View>
     </TouchableOpacity>
   );
@@ -50,4 +129,6 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
+  date: {},
+  status: {color: Colors.red},
 });

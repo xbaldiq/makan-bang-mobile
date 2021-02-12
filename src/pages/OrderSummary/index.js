@@ -19,8 +19,13 @@ const OrderSummary = ({navigation}) => {
       />
       <View style={styles.content}>
         <RNText style={styles.label}>Item Ordered</RNText>
-        <ItemListFood items={2} />
-        <ItemValue label="Cherry Healthy" value="IDR 150.000" />
+        <ItemListFood
+          items={2}
+          name="Nasi Putih"
+          price="10.000"
+          type="order-summary"
+          value="IDR 150.000"
+        />
         <ItemValue label="Driver" value="IDR 50.000" />
         <ItemValue label="Tax" value="IDR 5.000" />
         <ItemValue
@@ -42,7 +47,7 @@ const OrderSummary = ({navigation}) => {
       <View style={styles.button}>
         <Button
           label="Checkout Now"
-          onPress={() => navigation.replace('OrderSuccess')}
+          onPress={() => navigation.navigate('OrderSuccess')}
         />
       </View>
     </View>
