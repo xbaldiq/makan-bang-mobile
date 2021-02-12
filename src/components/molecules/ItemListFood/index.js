@@ -13,7 +13,7 @@ import {Colors} from '../../../styles';
 import {RNText} from '../../atoms';
 import Rating from '../Rating';
 
-const ItemListFood = ({image, onPress}) => {
+const ItemListFood = ({image = FoodDummy1, onPress, items, rating}) => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
       <View style={styles.container}>
@@ -24,7 +24,8 @@ const ItemListFood = ({image, onPress}) => {
             IDR 5000
           </RNText>
         </View>
-        <Rating />
+        {items && <RNText>{items} items</RNText>}
+        {rating && <Rating />}
       </View>
     </TouchableOpacity>
   );
@@ -36,7 +37,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     backgroundColor: Colors.white,
-    paddingHorizontal: 24,
     paddingVertical: 8,
     alignItems: 'center',
   },

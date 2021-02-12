@@ -5,7 +5,6 @@ import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../../assets';
 import {Colors} from '../../../styles';
 import {RNText} from '../../atoms';
 import ItemListFood from '../ItemListFood';
-import Rating from '../Rating';
 import {useNavigation} from '@react-navigation/native';
 
 const HomeTabSection = () => {
@@ -13,20 +12,24 @@ const HomeTabSection = () => {
   const NewTaste = () => {
     const navigation = useNavigation();
     return (
-      <View style={{paddingTop: 8}}>
+      <View style={{paddingTop: 8, paddingHorizontal: 24}}>
         <ItemListFood
+          rating={5}
           image={FoodDummy1}
           onPress={() => navigation.navigate('FoodDetail')}
         />
         <ItemListFood
+          rating={5}
           image={FoodDummy2}
           onPress={() => navigation.navigate('FoodDetail')}
         />
         <ItemListFood
+          rating={5}
           image={FoodDummy3}
           onPress={() => navigation.navigate('FoodDetail')}
         />
         <ItemListFood
+          rating={5}
           image={FoodDummy4}
           onPress={() => navigation.navigate('FoodDetail')}
         />
@@ -37,20 +40,24 @@ const HomeTabSection = () => {
   const Popular = () => {
     const navigation = useNavigation();
     return (
-      <View style={{paddingTop: 8}}>
+      <View style={{paddingTop: 8, paddingHorizontal: 24}}>
         <ItemListFood
+          rating={5}
           image={FoodDummy4}
           onPress={() => navigation.navigate('FoodDetail')}
         />
         <ItemListFood
+          rating={5}
           image={FoodDummy3}
           onPress={() => navigation.navigate('FoodDetail')}
         />
         <ItemListFood
+          rating={5}
           image={FoodDummy2}
           onPress={() => navigation.navigate('FoodDetail')}
         />
         <ItemListFood
+          rating={5}
           image={FoodDummy1}
           onPress={() => navigation.navigate('FoodDetail')}
         />
@@ -61,20 +68,24 @@ const HomeTabSection = () => {
   const Recommended = () => {
     const navigation = useNavigation();
     return (
-      <View style={{paddingTop: 8}}>
+      <View style={{paddingTop: 8, paddingHorizontal: 24}}>
         <ItemListFood
+          rating={5}
           image={FoodDummy3}
           onPress={() => navigation.navigate('FoodDetail')}
         />
         <ItemListFood
+          rating={5}
           image={FoodDummy2}
           onPress={() => navigation.navigate('FoodDetail')}
         />
         <ItemListFood
+          rating={5}
           image={FoodDummy1}
           onPress={() => navigation.navigate('FoodDetail')}
         />
         <ItemListFood
+          rating={5}
           image={FoodDummy4}
           onPress={() => navigation.navigate('FoodDetail')}
         />

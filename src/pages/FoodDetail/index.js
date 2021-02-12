@@ -10,7 +10,7 @@ import {FoodCover1, IcBackWhite} from '../../assets';
 import {Button, Counter, RNText} from '../../components';
 import {Colors} from '../../styles';
 
-const FoodDetail = () => {
+const FoodDetail = ({navigation}) => {
   return (
     <View style={styles.page}>
       <ImageBackground source={FoodCover1} style={styles.cover}>
@@ -45,7 +45,10 @@ const FoodDetail = () => {
             <RNText>Rp 150.000</RNText>
           </View>
           <View style={styles.button}>
-            <Button label="Order Now" />
+            <Button
+              label="Order Now"
+              onPress={() => navigation.navigate('OrderSummary')}
+            />
           </View>
         </View>
       </View>
