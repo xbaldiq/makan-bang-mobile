@@ -1,18 +1,20 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {Button, Gap, RNText} from '../../components';
-import {Colors} from '../../styles';
-import {IllSignUpSuccess} from '../../assets';
+import {StyleSheet, View} from 'react-native';
+import {Button, Gap, RNText} from '../../../components';
+import {Colors} from '../../../styles';
+import {IllOrderEmpty} from '../../../assets';
+import {useNavigation} from '@react-navigation/native';
 
-const SignUpSuccess = ({navigation}) => {
+const EmptyOrder = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.screen}>
-      <IllSignUpSuccess />
+      <IllOrderEmpty />
       <Gap height={30} />
-      <RNText size={20}>Mantap</RNText>
+      <RNText size={20}>Kamu lapar?</RNText>
       <Gap height={6} />
       <RNText size={14} font="light" style={styles.subtitle}>
-        Makanan sudah siap kamu pesan
+        Yuk mari pesan makanan
       </RNText>
       <Gap height={30} />
       <View style={styles.buttonContainer}>
@@ -21,11 +23,12 @@ const SignUpSuccess = ({navigation}) => {
           onPress={() => navigation.replace('MainApp')}
         />
       </View>
+      <Gap height={12} />
     </View>
   );
 };
 
-export default SignUpSuccess;
+export default EmptyOrder;
 
 const styles = StyleSheet.create({
   screen: {

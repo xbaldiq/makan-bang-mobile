@@ -18,7 +18,7 @@ const OrderSuccess = ({navigation}) => {
       <View style={styles.buttonContainer}>
         <Button
           label="Pesan Makanan Lainnya"
-          //   onPress={() => navigation.replace('MainApp')}
+          onPress={() => navigation.replace('MainApp')}
         />
       </View>
       <Gap height={12} />
@@ -27,7 +27,7 @@ const OrderSuccess = ({navigation}) => {
           label="Lihat Pesanan"
           color={Colors.secondaryAccent}
           labelColor={Colors.white}
-          //   onPress={() => navigation.replace('MainApp')}
+          onPress={() => navigation.replace('MainApp', {screen: 'Order'})}
         />
       </View>
     </View>
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: Colors.white,
   },
   buttonContainer: {
     width: '100%',
