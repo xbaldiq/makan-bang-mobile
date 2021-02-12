@@ -15,7 +15,7 @@ const OrderTabSection = () => {
       <View style={{paddingTop: 8, paddingHorizontal: 24}}>
         <ItemListFood
           image={FoodDummy1}
-          onPress={() => navigation.navigate('FoodDetail')}
+          onPress={() => navigation.navigate('OrderDetail')}
           items={3}
           price="750.000"
           type="in-progress"
@@ -23,7 +23,7 @@ const OrderTabSection = () => {
         />
         <ItemListFood
           image={FoodDummy2}
-          onPress={() => navigation.navigate('FoodDetail')}
+          onPress={() => navigation.navigate('OrderDetail')}
           items={3}
           price="750.000"
           type="in-progress"
@@ -31,7 +31,7 @@ const OrderTabSection = () => {
         />
         <ItemListFood
           image={FoodDummy3}
-          onPress={() => navigation.navigate('FoodDetail')}
+          onPress={() => navigation.navigate('OrderDetail')}
           items={3}
           price="750.000"
           type="in-progress"
@@ -39,7 +39,7 @@ const OrderTabSection = () => {
         />
         <ItemListFood
           image={FoodDummy4}
-          onPress={() => navigation.navigate('FoodDetail')}
+          onPress={() => navigation.navigate('OrderDetail')}
           items={3}
           price="750.000"
           type="in-progress"
@@ -55,7 +55,7 @@ const OrderTabSection = () => {
       <View style={{paddingTop: 8, paddingHorizontal: 24}}>
         <ItemListFood
           image={FoodDummy4}
-          onPress={() => navigation.navigate('FoodDetail')}
+          onPress={() => navigation.navigate('OrderDetail')}
           items={3}
           price="750.000"
           type="past-orders"
@@ -64,7 +64,7 @@ const OrderTabSection = () => {
         />
         <ItemListFood
           image={FoodDummy3}
-          onPress={() => navigation.navigate('FoodDetail')}
+          onPress={() => navigation.navigate('OrderDetail')}
           items={3}
           price="750.000"
           type="past-orders"

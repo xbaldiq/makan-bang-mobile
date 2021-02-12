@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {
   Button,
   Gap,
@@ -10,7 +10,7 @@ import {
 } from '../../components';
 import {Colors} from '../../styles';
 
-const OrderSummary = ({navigation}) => {
+const OrderDetail = ({navigation}) => {
   return (
     <ScrollView>
       <Header
@@ -45,9 +45,16 @@ const OrderSummary = ({navigation}) => {
         <ItemValue label="City" value="Surabaya" />
       </View>
 
+      <View style={styles.content}>
+        <RNText style={styles.label}>Order Status:</RNText>
+        <ItemValue label="#ASD123" value="Paid" valueColor={Colors.success} />
+      </View>
+
       <View style={styles.button}>
         <Button
-          label="Checkout Now"
+          label="Batalkan Pesanan"
+          color={Colors.warning}
+          labelColor={Colors.white}
           onPress={() => navigation.navigate('OrderSuccess')}
         />
       </View>
@@ -56,7 +63,7 @@ const OrderSummary = ({navigation}) => {
   );
 };
 
-export default OrderSummary;
+export default OrderDetail;
 
 const styles = StyleSheet.create({
   content: {

@@ -22,5 +22,6 @@ export {
   Order,
   FoodDetail,
   OrderSummary,
+  OrderSuccess,
   OrderDetail,
 };
