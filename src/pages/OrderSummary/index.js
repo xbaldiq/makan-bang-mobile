@@ -23,7 +23,11 @@ const OrderSummary = ({navigation}) => {
         <ItemValue label="Cherry Healthy" value="IDR 150.000" />
         <ItemValue label="Driver" value="IDR 50.000" />
         <ItemValue label="Tax" value="IDR 5.000" />
-        <ItemValue label="Total Price" value="IDR 205.000" />
+        <ItemValue
+          label="Total Price"
+          value="IDR 205.000"
+          valueColor={Colors.success}
+        />
       </View>
 
       <View style={styles.content}>
@@ -36,7 +40,10 @@ const OrderSummary = ({navigation}) => {
       </View>
 
       <View style={styles.button}>
-        <Button label="Checkout Now" onPress={() => console.log('Checkout')} />
+        <Button
+          label="Checkout Now"
+          onPress={() => navigation.replace('OrderSuccess')}
+        />
       </View>
     </View>
   );

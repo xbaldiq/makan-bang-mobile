@@ -3,11 +3,11 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Colors} from '../../../styles';
 import {RNText} from '../../atoms';
 
-const ItemValue = ({label, value}) => {
+const ItemValue = ({label, value, valueColor = Colors.black}) => {
   return (
     <View style={styles.container}>
       <RNText style={styles.label}>{label}</RNText>
-      <RNText>{value}</RNText>
+      <RNText style={styles.value(valueColor)}>{value}</RNText>
     </View>
   );
 };
@@ -22,4 +22,5 @@ const styles = StyleSheet.create({
   label: {
     color: Colors.gray,
   },
+  value: (color) => ({color: color}),
 });

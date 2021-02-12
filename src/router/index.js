@@ -13,6 +13,7 @@ import {
   Order,
   FoodDetail,
   OrderSummary,
+  OrderSuccess,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -70,6 +71,11 @@ const MainRouter = () => {
       <Stack.Screen
         name="OrderSummary"
         component={OrderSummary}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="OrderSuccess"
+        component={OrderSuccess}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

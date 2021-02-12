@@ -6,13 +6,13 @@ import {Colors} from '../../../styles';
 const Button = ({
   label,
   color = Colors.mainAccent,
-  textColor = Colors.primaryText,
+  labelColor = Colors.primaryText,
   onPress,
 }) => {
   return (
     <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
       <View style={styles.container(color)}>
-        <RNText size={14} font={'medium'} style={styles.text(textColor)}>
+        <RNText size={14} font={'medium'} style={styles.text(labelColor)}>
           {label}
         </RNText>
       </View>
@@ -28,5 +28,5 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
   }),
-  text: (textColor) => ({color: textColor, textAlign: 'center'}),
+  text: (labelColor) => ({color: labelColor, textAlign: 'center'}),
 });

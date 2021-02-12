@@ -20,7 +20,7 @@ const SignIn = ({navigation}) => {
         <Button
           label="Create New Account"
           color={Colors.secondaryAccent}
-          textColor={Colors.white}
+          labelColor={Colors.white}
           onPress={() => navigation.navigate('SignUp')}
         />
       </View>
