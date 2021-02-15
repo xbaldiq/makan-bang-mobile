@@ -1,15 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View, Dimensions, Image} from 'react-native';
+import {StyleSheet, View, Dimensions} from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../../assets';
 import {Colors} from '../../../styles';
 import {RNText} from '../../atoms';
-import {useNavigation} from '@react-navigation/native';
 import ItemListMenu from '../ItemListMenu';
 
 const ProfileTabSection = () => {
   const Account = () => {
-    const navigation = useNavigation();
     return (
       <View style={{paddingTop: 8, paddingHorizontal: 24}}>
         <ItemListMenu label="Edit Profile" />
@@ -21,7 +18,6 @@ const ProfileTabSection = () => {
   };
 
   const AppConfig = () => {
-    const navigation = useNavigation();
     return (
       <View style={{paddingTop: 8, paddingHorizontal: 24}}>
         <ItemListMenu label="Rate App" />

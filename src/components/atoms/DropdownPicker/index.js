@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Picker as PickerRN} from '@react-native-picker/picker';
 import RNText from '../Text';
 
-const DropdownPicker = ({label}) => {
+const DropdownPicker = ({label, value, onSelect}) => {
   return (
     <View>
       <RNText size={16} font="regular">
@@ -11,13 +11,11 @@ const DropdownPicker = ({label}) => {
       </RNText>
       <View style={styles.input}>
         <PickerRN
-        //   selectedValue={this.state.language}
-        //   onValueChange={(itemValue, itemIndex) =>
-        //     this.setState({language: itemValue})
-        //   }
-        >
-          <PickerRN.Item label="Java" value="java" />
-          <PickerRN.Item label="JavaScript" value="js" />
+          selectedValue={value}
+          onValueChange={(itemValue) => onSelect(itemValue)}>
+          <PickerRN.Item label="Surabaya" value="Surabaya" />
+          <PickerRN.Item label="Jakarta" value="Jakarta" />
+          <PickerRN.Item label="Yogyakarta" value="Yogyakarta" />
         </PickerRN>
       </View>
     </View>

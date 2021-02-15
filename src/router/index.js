@@ -34,7 +34,7 @@ const MainApp = () => {
 const MainRouter = () => {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen
+      <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
         options={{headerShown: false}}
@@ -58,7 +58,7 @@ const MainRouter = () => {
         name="SignUpSuccess"
         component={SignUpSuccess}
         options={{headerShown: false}}
-      /> */}
+      />
       <Stack.Screen
         name="MainApp"
         component={MainApp}

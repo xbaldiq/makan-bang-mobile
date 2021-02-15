@@ -4,13 +4,13 @@ import {TextInput as TextInputPPR} from 'react-native-paper';
 import {Colors} from '../../../styles';
 import RNText from '../Text/';
 
-const TextInput = ({label, placeholder}) => {
+const TextInput = ({label, placeholder, ...props}) => {
   return (
     <View>
       <RNText size={16} font={'medium'}>
         {label}
       </RNText>
-      <TextInputRN style={styles.input} placeholder={placeholder} />
+      <TextInputRN style={styles.input} placeholder={placeholder} {...props} />
     </View>
   );
 };

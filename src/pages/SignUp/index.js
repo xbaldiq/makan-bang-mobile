@@ -1,39 +1,116 @@
-import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Image,
+  ImagePickerIOS,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Button, Gap, Header, RNText, TextInput} from '../../components';
 import {Colors} from '../../styles';
+import {useSelector, useDispatch} from 'react-redux';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {showToast, useForm} from '../../utils';
 
 const SignUp = ({navigation}) => {
+  const dispatch = useDispatch();
+  const [form, setForm] = useForm({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const [photo, setPhoto] = useState('');
+
+  const onSubmit = () => {
+    console.log('form', form);
+    dispatch({type: 'SET_REGISTER', value: form});
+    navigation.navigate('SignUpAddress');
+  };
+
+  const addPhoto = () => {
+    const option = {
+      quality: 0.6,
+      maxHeight: 200,
+      maxWidth: 200,
+    };
+    launchImageLibrary(option, (response) => {
+      console.log('response', response);
+      if (response.errorCode) showToast(response.errorCode);
+      else if (response.didCancel) return;
+
+      const {fileName, type, uri} = response;
+      const source = {uri};
+      const imageData = {
+        uri,
+        type,
+        name: fileName,
+      };
+
+      dispatch({type: 'SET_PHOTO', value: imageData});
+      dispatch({type: 'SET_UPLOAD_STATUS', value: true});
+
+      console.log('setphoto', source);
+      setPhoto(source);
+    });
+  };
+
   return (
-    <View style={styles.screen}>
-      <Header title="Sign Up" subtitle={'Register and eat'} onBack={() => {}} />
-      <ScrollView style={styles.container}>
-        <View style={styles.photo}>
-          <View style={styles.borderPhoto}>
-            <View style={styles.photoContainer}>
-              <RNText size={14} font="light" style={styles.addPhoto}>
-                Add Photo
-              </RNText>
-            </View>
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <View style={styles.screen}>
+        <Header
+          title="Sign Up"
+          subtitle={'Register and eat'}
+          onBack={() => navigation.goBack()}
+        />
+        <View style={styles.container}>
+          <View style={styles.photo}>
+            <TouchableOpacity onPress={addPhoto}>
+              <View style={styles.borderPhoto}>
+                {photo ? (
+                  <Image source={photo} style={styles.photoContainer} />
+                ) : (
+                  <View style={styles.photoContainer}>
+                    <RNText size={14} font="light" style={styles.addPhoto}>
+                      Add Photo
+                    </RNText>
+                  </View>
+                )}
+              </View>
+            </TouchableOpacity>
           </View>
+          <TextInput
+            label="Full Name"
+            placeholder="Type your full name"
+            value={form.name}
+            onChangeText={(value) => setForm('name', value)}
+          />
+          <Gap height={16} />
+          <TextInput
+            label="Email Address"
+            placeholder="Type your email address"
+            value={form.email}
+            onChangeText={(value) => setForm('email', value)}
+          />
+          <Gap height={16} />
+          <TextInput
+            label="Password"
+            placeholder="Type your password"
+            value={form.password}
+            secureTextEntry
+            onChangeText={(value) => setForm('password', value)}
+          />
+          <Gap height={24} />
+          <Button
+            label="Continue"
+            onPress={() => onSubmit()}
+            color={Colors.mainAccent}
+          />
+          <Gap height={12} />
         </View>
-        <TextInput label="Full Name" placeholder="Type your full name" />
-        <Gap height={16} />
-        <TextInput
-          label="Email Address"
-          placeholder="Type your email address"
-        />
-        <Gap height={16} />
-        <TextInput label="Password" placeholder="Type your password" />
-        <Gap height={24} />
-        <Button
-          label="Continue"
-          onPress={() => navigation.navigate('SignUpAddress')}
-          color={Colors.mainAccent}
-        />
-        <Gap height={24} />
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -47,11 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: 24,
-    // marginVertical: 26,
-    // marginTop: 26,
-    // paddingBottom: 30,
     paddingVertical: 26,
-    // marginTop: 24,
   },
   photo: {
     alignItems: 'center',
@@ -73,7 +146,8 @@ const styles = StyleSheet.create({
     height: 90,
     borderRadius: 90,
     backgroundColor: Colors.lightSmoke,
-    padding: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   addPhoto: {
     color: Colors.gray,
