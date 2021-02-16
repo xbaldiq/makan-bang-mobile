@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 import {
   Image,
-  ImagePickerIOS,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {useDispatch} from 'react-redux';
 import {Button, Gap, Header, RNText, TextInput} from '../../components';
 import {Colors} from '../../styles';
-import {useSelector, useDispatch} from 'react-redux';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {showToast, useForm} from '../../utils';
 
 const SignUp = ({navigation}) => {

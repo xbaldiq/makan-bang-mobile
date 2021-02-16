@@ -1,8 +1,8 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {IllSignUpSuccess} from '../../assets';
 import {Button, Gap, RNText} from '../../components';
 import {Colors} from '../../styles';
-import {IllSignUpSuccess} from '../../assets';
 
 const SignUpSuccess = ({navigation}) => {
   return (
@@ -18,7 +18,9 @@ const SignUpSuccess = ({navigation}) => {
       <View style={styles.buttonContainer}>
         <Button
           label="Cari Makanan"
-          onPress={() => navigation.replace('MainApp')}
+          onPress={() =>
+            navigation.reset({index: 0, routes: [{name: 'MainApp'}]})
+          }
         />
       </View>
     </View>

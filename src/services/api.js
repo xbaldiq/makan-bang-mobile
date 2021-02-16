@@ -1,20 +1,12 @@
 import axios from 'axios';
 
 export const apiInstance = axios.create({
-  baseURL: 'https://360a90bf6d0e.ngrok.io/api/',
+  baseURL: 'https://22ef778fd7d2.ngrok.io/api/',
   // baseURL: 'http://192.168.1.110/api/',
   timeout: 10000,
 });
 
 export default {
-  // getData: () =>
-  //   api({
-  //     method: 'GET',
-  //     url: '/query',
-  //     params: {
-  //       search: 'parameter',
-  //     },
-  //   }),
   register: (data) =>
     apiInstance({
       method: 'POST',
