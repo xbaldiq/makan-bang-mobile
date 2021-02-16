@@ -1,18 +1,31 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import {StyleSheet, View, Dimensions} from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {Colors} from '../../../styles';
 import {RNText} from '../../atoms';
 import ItemListMenu from '../ItemListMenu';
+import {useNavigation} from '@react-navigation/native';
 
 const ProfileTabSection = () => {
+  const navigation = useNavigation();
+
   const Account = () => {
+    const signOut = () => {
+      AsyncStorage.multiRemove(['userProfile', 'token'])
+        .then(() => {
+          navigation.reset({index: 0, routes: [{name: 'SignIn'}]});
+        })
+        .catch((error) => console.log(error));
+    };
+
     return (
       <View style={{paddingTop: 8, paddingHorizontal: 24}}>
         <ItemListMenu label="Edit Profile" />
         <ItemListMenu label="Home Address" />
         <ItemListMenu label="Security" />
         <ItemListMenu label="Payments" />
+        <ItemListMenu label="Sign Out" onPress={signOut} />
       </View>
     );
   };
