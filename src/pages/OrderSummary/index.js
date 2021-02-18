@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {
   Button,
   Gap,
@@ -10,7 +10,14 @@ import {
 } from '../../components';
 import {Colors} from '../../styles';
 
-const OrderSummary = ({navigation}) => {
+const OrderSummary = ({navigation, route}) => {
+  // route params
+  const params = route.params;
+  const {item, transaction, userProfile} = params;
+
+  // DEBUGGING
+  // console.log({item, transaction, userProfile});
+
   return (
     <ScrollView>
       <Header
@@ -21,28 +28,32 @@ const OrderSummary = ({navigation}) => {
       <View style={styles.content}>
         <RNText style={styles.label}>Item Ordered</RNText>
         <ItemListFood
-          items={2}
-          name="Nasi Putih"
-          price="10.000"
+          image={{uri: item.picturePath}}
+          name={item.name}
+          price={item.price}
+          items={transaction.totalItem}
           type="order-summary"
-          value="IDR 150.000"
         />
-        <ItemValue label="Driver" value="IDR 50.000" />
-        <ItemValue label="Tax" value="IDR 5.000" />
+        <ItemValue label="Driver" value={transaction.driver} type="currency" />
+        <ItemValue label="Tax" value={transaction.tax} type="currency" />
         <ItemValue
           label="Total Price"
-          value="IDR 205.000"
+          value={transaction.total}
           valueColor={Colors.success}
+          type="currency"
         />
       </View>
 
       <View style={styles.content}>
         <RNText style={styles.label}>Deliver to:</RNText>
-        <ItemValue label="Name" value="Iqbal" />
-        <ItemValue label="Phone No." value="0812717171" />
-        <ItemValue label="Address" value="Surabaya" />
-        <ItemValue label="House No." value="ALT F4" />
-        <ItemValue label="City" value="Surabaya" />
+        <ItemValue label="Name" value={userProfile.name} />
+        <ItemValue
+          label="Phone No."
+          value={userProfile.phone || 'Belum mengisi Nomor HP'}
+        />
+        <ItemValue label="Address" value={userProfile.address} />
+        <ItemValue label="House No." value={userProfile.houseNumber} />
+        <ItemValue label="City" value={userProfile.city} />
       </View>
 
       <View style={styles.button}>

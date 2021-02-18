@@ -11,6 +11,7 @@ import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {FoodDummy1, FoodDummy2} from '../../../assets';
 import {Colors} from '../../../styles';
 import {RNText} from '../../atoms';
+import Number from '../Number';
 import Rating from '../Rating';
 
 /**
@@ -39,9 +40,7 @@ const ItemListFood = ({
           <>
             <View style={styles.content}>
               <RNText size={16}>{name}</RNText>
-              <RNText size={13} style={{color: Colors.gray}}>
-                IDR {price}
-              </RNText>
+              <Number value={price} />
             </View>
             <Rating rating={rating} />
           </>
@@ -51,9 +50,7 @@ const ItemListFood = ({
           <>
             <View style={styles.content}>
               <RNText size={16}>{name}</RNText>
-              <RNText size={13} style={{color: Colors.gray}}>
-                IDR {price}
-              </RNText>
+              <Number value={price} />
             </View>
             <RNText>{items} items</RNText>
           </>
@@ -63,9 +60,7 @@ const ItemListFood = ({
           <>
             <View style={styles.content}>
               <RNText size={16}>{name}</RNText>
-              <RNText size={13} style={{color: Colors.gray}}>
-                {items} items . IDR {price}
-              </RNText>
+              <Number value={price} />
             </View>
           </>
         );

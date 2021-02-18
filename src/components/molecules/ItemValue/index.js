@@ -2,12 +2,18 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Colors} from '../../../styles';
 import {RNText} from '../../atoms';
+import Number from '../Number';
 
-const ItemValue = ({label, value, valueColor = Colors.black}) => {
+const ItemValue = ({label, value, valueColor = Colors.black, type}) => {
   return (
     <View style={styles.container}>
       <RNText style={styles.label}>{label}</RNText>
-      <RNText style={styles.value(valueColor)}>{value}</RNText>
+
+      {type === 'currency' ? (
+        <Number value={value} style={styles.value(valueColor)} />
+      ) : (
+        <RNText style={styles.value(valueColor)}>{value}</RNText>
+      )}
     </View>
   );
 };

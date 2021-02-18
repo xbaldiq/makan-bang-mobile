@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export const apiInstance = axios.create({
-  baseURL: 'https://22ef778fd7d2.ngrok.io/api/',
-  // baseURL: 'http://192.168.1.110/api/',
+  baseURL: 'https://foodmarket-backend.buildwithangga.id/api/',
+  // baseURL: 'https://2c7825842abc.ngrok.io/api/',
   timeout: 10000,
 });
 
@@ -29,6 +29,24 @@ export default {
         'Content-Type': 'multipart/form-data',
       },
       data,
+    });
+  },
+  getFoods: () => {
+    // const token = await getData('token')
+    return apiInstance({
+      method: 'GET',
+      url: '/food',
+      // headers: {
+      //   Authorization: token,
+      //   'Content-Type': 'multipart/form-data',
+      // },
+      // data,
+    });
+  },
+  getFoodsByTypes: (types) => {
+    return apiInstance({
+      method: 'GET',
+      url: `/food?types=${types}`,
     });
   },
 };

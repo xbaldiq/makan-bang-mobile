@@ -11,7 +11,7 @@ const SplashScreen = ({navigation}) => {
         if (token) navigation.reset({index: 1, routes: [{name: 'MainApp'}]});
         else navigation.replace('SignIn');
       });
-    }, 750);
+    }, 0);
   }, []);
 
   return (

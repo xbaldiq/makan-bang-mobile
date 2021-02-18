@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -6,14 +6,54 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {FoodCover1, IcBackWhite} from '../../assets';
-import {Button, Counter, RNText} from '../../components';
+import {useSelector} from 'react-redux';
+import {IcBackWhite} from '../../assets';
+import {Button, Counter, Number, Rating, RNText} from '../../components';
 import {Colors} from '../../styles';
+import {getData} from '../../utils';
 
-const FoodDetail = ({navigation}) => {
+const FoodDetail = ({navigation, route}) => {
+  const [totalItem, setTotalItem] = useState(1);
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    getData('userProfile').then((res) => {
+      setUserProfile(res);
+    });
+  }, []);
+
+  // route params
+  const item = route.params;
+  const {id, name, picturePath, description, ingredients, price, rate} = item;
+
+  const onCounterChange = (value) => {
+    setTotalItem(value);
+  };
+
+  const onOrder = () => {
+    const amount = price * totalItem;
+    const tax = (1 / 100) * amount;
+    const driver = 50000;
+    const total = amount + tax + driver;
+
+    const data = {
+      item,
+      transaction: {
+        amount,
+        totalItem,
+        tax,
+        driver,
+        total,
+      },
+      userProfile,
+    };
+
+    navigation.navigate('OrderSummary', data);
+  };
+
   return (
     <View style={styles.page}>
-      <ImageBackground source={FoodCover1} style={styles.cover}>
+      <ImageBackground source={{uri: picturePath}} style={styles.cover}>
         <TouchableOpacity style={styles.back}>
           <IcBackWhite />
         </TouchableOpacity>
@@ -22,33 +62,26 @@ const FoodDetail = ({navigation}) => {
         <View style={styles.mainContent}>
           <View style={styles.productContainer}>
             <View>
-              <RNText size={16}>Cherry Healthy</RNText>
-              <RNText>Rating</RNText>
+              <RNText size={16}>{name}</RNText>
+              <Rating rating={rate} />
             </View>
-            <Counter />
+            <Counter onValueChange={onCounterChange} />
           </View>
           <View>
-            <RNText style={styles.description}>
-              Makanan khas Bandung yang cukup sering dipesan oleh anak muda
-              dengan pola makan yang cukup tinggi dengan mengutamakan diet yang
-              sehat dan teratur.
-            </RNText>
+            <RNText style={styles.description}>{description}</RNText>
           </View>
           <View style={styles.ingredients}>
             <RNText font="medium">Ingredients:</RNText>
-            <RNText>Seledri, telur, blueberry, madu.</RNText>
+            <RNText>{ingredients}</RNText>
           </View>
         </View>
         <View style={styles.footer}>
           <View style={styles.priceContainer}>
             <RNText style={{color: Colors.gray}}>Price</RNText>
-            <RNText>Rp 150.000</RNText>
+            <Number value={totalItem * price} />
           </View>
           <View style={styles.button}>
-            <Button
-              label="Order Now"
-              onPress={() => navigation.navigate('OrderSummary')}
-            />
+            <Button label="Order Now" onPress={onOrder} />
           </View>
         </View>
       </View>
