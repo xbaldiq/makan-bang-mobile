@@ -1,8 +1,8 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {IllOrderSuccess} from '../../assets';
 import {Button, Gap, RNText} from '../../components';
 import {Colors} from '../../styles';
-import {IllOrderSuccess} from '../../assets';
 
 const OrderSuccess = ({navigation}) => {
   return (
@@ -33,6 +33,14 @@ const OrderSuccess = ({navigation}) => {
     </View>
   );
 };
+
+// const OrderSuccess = ({navigation}) => {
+//   return (
+//     <View style={styles.screen}>
+//       <RNText>Test</RNText>
+//     </View>
+//   );
+// };
 
 export default OrderSuccess;
 

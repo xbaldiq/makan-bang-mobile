@@ -1,13 +1,16 @@
-import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {WebView} from 'react-native-webview';
 import {
   Button,
   Gap,
   Header,
   ItemListFood,
   ItemValue,
+  Loading,
   RNText,
 } from '../../components';
+import api from '../../services/api';
 import {Colors} from '../../styles';
 
 const OrderSummary = ({navigation, route}) => {
@@ -15,8 +18,68 @@ const OrderSummary = ({navigation, route}) => {
   const params = route.params;
   const {item, transaction, userProfile} = params;
 
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+  const [paymentURL, setPaymentURL] = useState('https://google.com');
+
   // DEBUGGING
-  // console.log({item, transaction, userProfile});
+  console.log({item, transaction, userProfile});
+
+  const onCheckout = () => {
+    // const form = new FormData();
+    const data = {
+      food_id: item.id,
+      user_id: userProfile.id,
+      quantity: transaction.totalItem,
+      total: transaction.total,
+      status: 'PENDING',
+    };
+
+    // form.append('data', data);
+    console.log('data:', data);
+    api
+      .checkout(data)
+      .then((res) => {
+        console.log('res', res);
+        const {payment_url} = res.data.data;
+
+        setIsPaymentOpen(true);
+        setPaymentURL(payment_url);
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
+  };
+
+  const onNavChange = (state) => {
+    console.log('nav', state);
+
+    const titleWeb = 'Laravel';
+    if (state.title === titleWeb) {
+      navigation.replace('OrderSuccess');
+      // navigation.reset({index: 0, routes: [{name: 'OrderSuccess'}]});
+    }
+  };
+
+  if (isPaymentOpen) {
+    return (
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <Header
+          title="Payment"
+          subtitle="You deserve better meal"
+          onBack={() => setIsPaymentOpen(false)}
+        />
+        <View style={{flex: 1}}>
+          <WebView
+            source={{uri: paymentURL}}
+            renderLoading={() => <Text>Testxxxxxx</Text>}
+            // renderLoading={() => <Loading />}
+            onNavigationStateChange={onNavChange}
+          />
+          {/* <WebView source={{uri: 'https://google.com'}} style={{marginTop: 20}} /> */}
+        </View>
+      </ScrollView>
+    );
+  }
 
   return (
     <ScrollView>
@@ -59,7 +122,8 @@ const OrderSummary = ({navigation, route}) => {
       <View style={styles.button}>
         <Button
           label="Checkout Now"
-          onPress={() => navigation.navigate('OrderSuccess')}
+          onPress={onCheckout}
+          // onPress={() => navigation.navigate('OrderSuccess')}
         />
       </View>
       <Gap height={20} />

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {getData} from '../utils';
 
 export const apiInstance = axios.create({
   baseURL: 'https://foodmarket-backend.buildwithangga.id/api/',
@@ -47,6 +48,19 @@ export default {
     return apiInstance({
       method: 'GET',
       url: `/food?types=${types}`,
+    });
+  },
+  checkout: async (data) => {
+    const token = await getData('token').then((res) => res.value);
+    console.log('token:', token);
+    return apiInstance({
+      method: 'POST',
+      url: '/checkout',
+      headers: {
+        Authorization: token,
+        // 'Content-Type': 'multipart/form-data',
+      },
+      data,
     });
   },
 };
