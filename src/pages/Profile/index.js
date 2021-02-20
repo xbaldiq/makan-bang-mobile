@@ -1,37 +1,47 @@
-import React from 'react';
-import {ScrollView, StyleSheet, View, Image} from 'react-native';
-import {ProfileDummy} from '../../assets';
-import {
-  Button,
-  Gap,
-  Header,
-  ProfileTabSection,
-  RNText,
-  TextInput,
-} from '../../components';
+import React, {useEffect, useState} from 'react';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Gap, ProfileTabSection, RNText} from '../../components';
 import {Colors} from '../../styles';
+import {getData} from '../../utils';
 
 const Profile = () => {
+  const [userProfile, setUserProfile] = useState({});
+  useEffect(() => {
+    getUserProfile();
+  }, []);
+
+  const getUserProfile = () => {
+    getData('userProfile').then((res) => setUserProfile(res));
+  };
+
+  const updatePhoto = () => {
+    // getData('userProfile').then((res) => {
+    //   setUserProfile(res);
+    // });
+  };
+
   return (
     <View style={styles.screen}>
-      {/* <Header title="Sign Up" subtitle={'Register and eat'} onBack={() => {}} /> */}
-      {/* <ScrollView style={styles.container}> */}
       <View style={styles.profileDetail}>
         <View style={styles.photo}>
           <View style={styles.borderPhoto}>
-            <Image source={ProfileDummy} />
+            <TouchableOpacity onPress={updatePhoto}>
+              <Image
+                source={{uri: userProfile.profile_photo_url}}
+                style={styles.photoContainer}
+              />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.profileDescriptionContainer}>
-          <RNText>Iqbaldhia</RNText>
-          <RNText style={{color: Colors.gray}}>iqbaldhiaa@gmail.com</RNText>
+          <RNText>{userProfile.name}</RNText>
+          <RNText style={{color: Colors.gray}}>{userProfile.email}</RNText>
         </View>
       </View>
       <Gap height={24} />
       <View style={styles.profileTab}>
         <ProfileTabSection />
       </View>
-      {/* </ScrollView> */}
     </View>
   );
 };
@@ -44,9 +54,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // backgroundColor: 'white',
-    // paddingHorizontal: 24,
-    // paddingVertical: 26,
   },
   profileDetail: {
     backgroundColor: 'white',
