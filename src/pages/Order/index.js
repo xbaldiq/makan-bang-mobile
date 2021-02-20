@@ -1,20 +1,27 @@
-import React, {useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {
-  Button,
-  EmptyOrder,
-  Gap,
-  Header,
-  OrderTabSection,
-  RNText,
-} from '../../components';
-import {Colors} from '../../styles';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {EmptyOrder, Header, OrderTabSection} from '../../components';
+import {orderAction} from '../../redux/action';
 
 const Order = ({navigation}) => {
-  const [isEmpty] = useState(false);
+  const {orders} = useSelector((state) => state.orderReducer);
+  // const globalState = useSelector((state) => state);
+  // console.log('globalState', globalState);
+  // const [isEmpty] = useState(orders);
+  // const [isEmpty] = useState(orderReducer);
+  const dispatch = useDispatch();
+
+  // console.log('isEmpty', isEmpty);
+
+  useEffect(() => {
+    console.log('useEffect ordertab section');
+    dispatch(orderAction());
+  }, []);
+
   return (
     <View style={styles.screen}>
-      {isEmpty ? (
+      {orders.length < 1 ? (
         <EmptyOrder />
       ) : (
         <View style={styles.content}>

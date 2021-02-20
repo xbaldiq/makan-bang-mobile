@@ -60,7 +60,13 @@ const ItemListFood = ({
           <>
             <View style={styles.content}>
               <RNText size={16}>{name}</RNText>
-              <Number value={price} />
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <RNText style={{color: Colors.gray}} size={13}>
+                  {items} items
+                </RNText>
+                <View style={styles.dot} />
+                <Number value={price} />
+              </View>
             </View>
           </>
         );
@@ -69,13 +75,21 @@ const ItemListFood = ({
           <>
             <View style={styles.content}>
               <RNText size={16}>{name}</RNText>
-              <RNText size={13} style={{color: Colors.gray}}>
-                {items} items . IDR {price}
-              </RNText>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <RNText style={{color: Colors.gray}} size={13}>
+                  {items} items
+                </RNText>
+                <View style={styles.dot} />
+                <Number value={price} />
+              </View>
             </View>
             <View>
-              <RNText style={styles.date}>{date}</RNText>
-              <RNText style={styles.status}>{status}</RNText>
+              <RNText size={10} style={styles.date}>
+                {date}
+              </RNText>
+              <RNText size={10} style={styles.status(status)}>
+                {status}
+              </RNText>
             </View>
           </>
         );
@@ -89,7 +103,6 @@ const ItemListFood = ({
                 IDR {price}
               </RNText>
             </View>
-            <Rating />
           </>
         );
     }
@@ -124,6 +137,15 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
-  date: {},
-  status: {color: Colors.red},
+  date: {color: Colors.gray},
+  status: (status) => ({
+    color: status === 'CANCELLED' ? Colors.red : Colors.green,
+  }),
+  dot: {
+    width: 3,
+    height: 3,
+    borderRadius: 3,
+    backgroundColor: Colors.gray,
+    marginHorizontal: 4,
+  },
 });

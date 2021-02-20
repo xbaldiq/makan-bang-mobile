@@ -1,50 +1,42 @@
-import React from 'react';
-import {StyleSheet, Text, View, Dimensions, Image} from 'react-native';
-import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../../assets';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect} from 'react';
+import {Dimensions, StyleSheet, View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
+import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
+import {useDispatch, useSelector} from 'react-redux';
+import {orderInProgressAction, orderPastAction} from '../../../redux/action';
 import {Colors} from '../../../styles';
 import {RNText} from '../../atoms';
 import ItemListFood from '../ItemListFood';
-import {useNavigation} from '@react-navigation/native';
 
 const OrderTabSection = () => {
+  const dispatch = useDispatch();
+  const {inProgress, past} = useSelector((state) => state.orderReducer);
+
+  useEffect(() => {
+    //get inProgress
+    dispatch(orderInProgressAction());
+
+    //get past
+    dispatch(orderPastAction());
+  }, []);
+
   // Tab NewTaste
   const InProgress = () => {
     const navigation = useNavigation();
     return (
       <View style={{paddingTop: 8, paddingHorizontal: 24}}>
-        <ItemListFood
-          image={FoodDummy1}
-          onPress={() => navigation.navigate('OrderDetail')}
-          items={3}
-          price="750.000"
-          type="in-progress"
-          name="soto lamongan"
-        />
-        <ItemListFood
-          image={FoodDummy2}
-          onPress={() => navigation.navigate('OrderDetail')}
-          items={3}
-          price="750.000"
-          type="in-progress"
-          name="soto lamongan"
-        />
-        <ItemListFood
-          image={FoodDummy3}
-          onPress={() => navigation.navigate('OrderDetail')}
-          items={3}
-          price="750.000"
-          type="in-progress"
-          name="soto lamongan"
-        />
-        <ItemListFood
-          image={FoodDummy4}
-          onPress={() => navigation.navigate('OrderDetail')}
-          items={3}
-          price="750.000"
-          type="in-progress"
-          name="soto lamongan"
-        />
+        {inProgress.map((order) => (
+          <ItemListFood
+            key={order.id}
+            image={{uri: order.food.picturePath}}
+            onPress={() => navigation.navigate('OrderDetail')}
+            items={order.quantity}
+            price={order.total}
+            type="in-progress"
+            name={order.food.name}
+          />
+        ))}
       </View>
     );
   };
@@ -52,30 +44,25 @@ const OrderTabSection = () => {
   const PastOrders = () => {
     const navigation = useNavigation();
     return (
-      <View style={{paddingTop: 8, paddingHorizontal: 24}}>
-        <ItemListFood
-          image={FoodDummy4}
-          onPress={() => navigation.navigate('OrderDetail')}
-          items={3}
-          price="750.000"
-          type="past-orders"
-          name="soto lamongan"
-          date="Jun 12, 14:00"
-        />
-        <ItemListFood
-          image={FoodDummy3}
-          onPress={() => navigation.navigate('OrderDetail')}
-          items={3}
-          price="750.000"
-          type="past-orders"
-          name="soto lamongan"
-          date="Jun 12, 14:00"
-          status="Cancelled"
-        />
-      </View>
+      <ScrollView>
+        <View style={{paddingTop: 8, paddingHorizontal: 24}}>
+          {past.map((order) => (
+            <ItemListFood
+              key={order.id}
+              image={{uri: order.food.picturePath}}
+              onPress={() => navigation.navigate('OrderDetail')}
+              items={order.quantity}
+              price={order.total}
+              type="past-orders"
+              name={order.food.name}
+              date={new Date(order.created_at).toDateString()}
+              status={order.status}
+            />
+          ))}
+        </View>
+      </ScrollView>
     );
   };
-
   const renderTabBar = (props) => (
     <TabBar
       {...props}
@@ -93,7 +80,7 @@ const OrderTabSection = () => {
         borderBottomWidth: 1,
       }}
       tabStyle={{width: 'auto'}}
-      renderLabel={({route, focused, color}) => (
+      renderLabel={({route, focused}) => (
         <RNText
           font={'medium'}
           style={{color: focused ? Colors.black : Colors.gray, margin: 8}}>

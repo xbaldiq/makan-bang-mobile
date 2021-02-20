@@ -25,7 +25,6 @@ const OrderSummary = ({navigation, route}) => {
   console.log({item, transaction, userProfile});
 
   const onCheckout = () => {
-    // const form = new FormData();
     const data = {
       food_id: item.id,
       user_id: userProfile.id,
@@ -55,8 +54,8 @@ const OrderSummary = ({navigation, route}) => {
 
     const titleWeb = 'Laravel';
     if (state.title === titleWeb) {
-      navigation.replace('OrderSuccess');
-      // navigation.reset({index: 0, routes: [{name: 'OrderSuccess'}]});
+      // navigation.replace('OrderSuccess');
+      navigation.reset({index: 0, routes: [{name: 'OrderSuccess'}]});
     }
   };
 

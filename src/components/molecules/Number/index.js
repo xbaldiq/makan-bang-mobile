@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import NumberFormat from 'react-number-format';
+import {Colors} from '../../../styles';
 import {RNText} from '../../atoms';
 
 const Number = ({value, type, style}) => {
@@ -11,7 +12,11 @@ const Number = ({value, type, style}) => {
         decimalSeparator="."
         decimalScale={1}
         displayType={'text'}
-        renderText={(value) => <RNText style={style}>{value}</RNText>}
+        renderText={(value) => (
+          <RNText size={13} style={{color: Colors.gray, ...style}}>
+            {value}
+          </RNText>
+        )}
         decimalScale={1}
         fixedDecimalScale
       />
@@ -25,7 +30,11 @@ const Number = ({value, type, style}) => {
       decimalSeparator=","
       displayType="text"
       prefix="IDR "
-      renderText={(value) => <RNText style={style}>{value}</RNText>}
+      renderText={(value) => (
+        <RNText size={13} style={{color: Colors.gray, ...style}}>
+          {value}
+        </RNText>
+      )}
       style={style}
     />
   );
