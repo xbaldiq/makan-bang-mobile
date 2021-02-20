@@ -8,9 +8,31 @@ import {
   ItemValue,
   RNText,
 } from '../../components';
+import api from '../../services/api';
 import {Colors} from '../../styles';
+import {showToast} from '../../utils';
 
-const OrderDetail = ({navigation}) => {
+const OrderDetail = ({navigation, route}) => {
+  const order = route.params;
+
+  //Utils
+  const calculateAmount = (price, qty) => price * qty;
+  const calculateTax = (price) => (price * 10) / 100;
+  const DRIVER_COST = 25000;
+
+  const onCancel = () => {
+    api
+      .cancelOrder(order.id)
+      .then((res) => {
+        showToast('Pesanan berhasil dibatalkan', 'success');
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'MainApp'}],
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <ScrollView>
       <Header
@@ -21,42 +43,61 @@ const OrderDetail = ({navigation}) => {
       <View style={styles.content}>
         <RNText style={styles.label}>Item Ordered</RNText>
         <ItemListFood
-          items={2}
-          name="Nasi Putih"
-          price="10.000"
           type="order-summary"
-          value="IDR 150.000"
+          items={order.quantity}
+          name={order.food.name}
+          price={order.food.price}
+          image={{uri: order.food.picturePath}}
         />
-        <ItemValue label="Driver" value="IDR 50.000" />
-        <ItemValue label="Tax" value="IDR 5.000" />
+        <RNText style={styles.label}>Details Transaction</RNText>
+        <ItemValue
+          label={order.food.name}
+          value={calculateAmount(order.food.price, order.quantity)}
+          type="currency"
+        />
+        <ItemValue label="Driver" value={DRIVER_COST} type="currency" />
+        <ItemValue
+          label="Tax"
+          value={calculateTax(order.food.price)}
+          type="currency"
+        />
         <ItemValue
           label="Total Price"
-          value="IDR 205.000"
-          valueColor={Colors.success}
+          value={order.total}
+          valueColor="#1ABC9C"
+          type="currency"
         />
       </View>
 
       <View style={styles.content}>
-        <RNText style={styles.label}>Deliver to:</RNText>
-        <ItemValue label="Name" value="Iqbal" />
-        <ItemValue label="Phone No." value="0812717171" />
-        <ItemValue label="Address" value="Surabaya" />
-        <ItemValue label="House No." value="ALT F4" />
-        <ItemValue label="City" value="Surabaya" />
+        <Text style={styles.label}>Deliver to:</Text>
+        <ItemValue label="Name" value={order.user.name} />
+        <ItemValue label="Phone No." value={order.user.phoneNumber} />
+        <ItemValue label="Address" value={order.user.address} />
+        <ItemValue label="House No." value={order.user.houseNumber} />
+        <ItemValue label="City" value={order.user.city} />
       </View>
 
       <View style={styles.content}>
-        <RNText style={styles.label}>Order Status:</RNText>
-        <ItemValue label="#ASD123" value="Paid" valueColor={Colors.success} />
+        <Text style={styles.label}>Order Status:</Text>
+        <ItemValue
+          label={`#${order.id}`}
+          value={order.status}
+          valueColor={
+            order.status === 'CANCELLED' ? Colors.warning : Colors.success
+          }
+        />
       </View>
 
       <View style={styles.button}>
-        <Button
-          label="Batalkan Pesanan"
-          color={Colors.warning}
-          labelColor={Colors.white}
-          onPress={() => navigation.navigate('OrderSuccess')}
-        />
+        {order.status === 'PENDING' && (
+          <Button
+            label="Batalkan Pesanan"
+            color={Colors.warning}
+            labelColor={Colors.white}
+            onPress={onCancel}
+          />
+        )}
       </View>
       <Gap height={20} />
     </ScrollView>

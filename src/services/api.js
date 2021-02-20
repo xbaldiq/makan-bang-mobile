@@ -123,6 +123,19 @@ export default {
         throw error;
       });
   },
+
+  /**
+   * @param {Number} id orderId
+   */
+  cancelOrder: async (id) => {
+    const token = await getData('token').then((res) => res.value);
+    return apiInstance({
+      method: 'POST',
+      url: '/transaction/' + id,
+      headers: {Authorization: token},
+      data: {status: 'CANCELLED'},
+    });
+  },
 };
 
 // api.interceptors.request.use(function (config) {

@@ -25,19 +25,21 @@ const OrderTabSection = () => {
   const InProgress = () => {
     const navigation = useNavigation();
     return (
-      <View style={{paddingTop: 8, paddingHorizontal: 24}}>
-        {inProgress.map((order) => (
-          <ItemListFood
-            key={order.id}
-            image={{uri: order.food.picturePath}}
-            onPress={() => navigation.navigate('OrderDetail')}
-            items={order.quantity}
-            price={order.total}
-            type="in-progress"
-            name={order.food.name}
-          />
-        ))}
-      </View>
+      <ScrollView>
+        <View style={{paddingTop: 8, paddingHorizontal: 24}}>
+          {inProgress.map((order) => (
+            <ItemListFood
+              type="in-progress"
+              key={order.id}
+              name={order.food.name}
+              image={{uri: order.food.picturePath}}
+              items={order.quantity}
+              price={order.total}
+              onPress={() => navigation.navigate('OrderDetail', order)}
+            />
+          ))}
+        </View>
+      </ScrollView>
     );
   };
 
@@ -48,15 +50,15 @@ const OrderTabSection = () => {
         <View style={{paddingTop: 8, paddingHorizontal: 24}}>
           {past.map((order) => (
             <ItemListFood
+              type="past-orders"
               key={order.id}
+              name={order.food.name}
               image={{uri: order.food.picturePath}}
-              onPress={() => navigation.navigate('OrderDetail')}
               items={order.quantity}
               price={order.total}
-              type="past-orders"
-              name={order.food.name}
               date={new Date(order.created_at).toDateString()}
               status={order.status}
+              onPress={() => navigation.navigate('OrderDetail', order)}
             />
           ))}
         </View>
