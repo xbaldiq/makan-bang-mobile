@@ -12,7 +12,7 @@ const Loading = () => {
         loop
         style={styles.animation}
       /> */}
-      <ActivityIndicator size="large" color={Colors.success} />
+      <ActivityIndicator size="large" color={Colors.mainAccent} />
       <Text style={styles.text}>Loading...</Text>
     </View>
   );
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     flex: 1,
-    backgroundColor: 'rgba(0,0,0, 0.1)',
+    backgroundColor: 'rgba(0,0,0, 0.9)',
     width: '100%',
     height: '100%',
     justifyContent: 'center',
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Poppins-Regular',
     marginTop: 12,
+    color: Colors.white,
   },
   animation: {
     width: 200,

@@ -1,13 +1,12 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View, Dimensions, Image} from 'react-native';
-import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../../../assets';
+import {Dimensions, StyleSheet, View} from 'react-native';
+import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
+import {useDispatch, useSelector} from 'react-redux';
+import {getFoodDataByTypes} from '../../../redux/action';
 import {Colors} from '../../../styles';
 import {RNText} from '../../atoms';
 import ItemListFood from '../ItemListFood';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import {getFoodDataByTypes} from '../../../redux/action';
 
 const HomeTabSection = () => {
   const {newTaste, popular, recommended} = useSelector(

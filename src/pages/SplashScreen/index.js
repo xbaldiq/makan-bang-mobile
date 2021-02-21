@@ -1,6 +1,6 @@
 import React from 'react';
 import {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {Logo} from '../../assets';
 import {getData} from '../../utils';
 
@@ -11,12 +11,12 @@ const SplashScreen = ({navigation}) => {
         if (token) navigation.reset({index: 1, routes: [{name: 'MainApp'}]});
         else navigation.replace('SignIn');
       });
-    }, 0);
+    }, 1000);
   }, []);
 
   return (
     <View style={styles.container}>
-      <Logo />
+      <Logo width={200} height={200} />
       <View style={{height: 20}} />
       <Text style={styles.appName}> Makan Bang </Text>
     </View>

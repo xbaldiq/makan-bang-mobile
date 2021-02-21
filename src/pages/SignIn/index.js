@@ -9,8 +9,12 @@ import {useForm} from '../../utils';
 const SignIn = ({navigation}) => {
   const dispatch = useDispatch();
   const [form, setForm] = useForm({
-    email: 'jennie.kim@blackpink.com',
-    password: '12345678',
+    email: '',
+    password: '',
+
+    // DEBUGGING
+    // email: 'jennie.kim@blackpink.com',
+    // password: '12345678',
   });
 
   const onSubmit = async () => {

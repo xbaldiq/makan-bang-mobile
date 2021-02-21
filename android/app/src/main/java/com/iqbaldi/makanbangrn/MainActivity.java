@@ -1,4 +1,4 @@
-package com.makanbangrn;
+package com.iqbaldi.makanbangrn;
 
 import com.facebook.react.ReactActivity;
 

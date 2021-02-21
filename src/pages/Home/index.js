@@ -1,12 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  FoodDummy1,
-  FoodDummy2,
-  FoodDummy3,
-  FoodDummy4,
-} from '../../assets/Dummy/';
 import {FoodCard, Gap, HomeProfile, HomeTabSection} from '../../components';
 import {getFoodData} from '../../redux/action';
 import {Colors} from '../../styles';
@@ -14,7 +8,6 @@ import {Colors} from '../../styles';
 const Home = () => {
   const dispatch = useDispatch();
   const {food} = useSelector((state) => state.homeReducer);
-  // const [food, setFood] = useState([]);
 
   useEffect(() => {
     dispatch(getFoodData());
@@ -34,6 +27,7 @@ const Home = () => {
                   image={{uri: item.picturePath}}
                   label={item.name}
                   rating={item.rate}
+                  onPress={() => navigation.navigate('FoodDetail', item)}
                 />
               ))}
               <Gap width={24} />

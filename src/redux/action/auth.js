@@ -28,16 +28,18 @@ export const signUpAction = (registerData, photoReducer, navigation) => async (
 
             user.profile_photo_url = `${urlPhoto}${photoRelativePath}`;
             storeData('userProfile', user);
-            navigation.reset({index: 0, routes: [{name: 'SuccessSignUp'}]});
+            dispatch(setLoading(false));
+            navigation.reset({index: 0, routes: [{name: 'SignUpSuccess'}]});
           })
           .catch(() => {
             showToast('Upload image error');
-            navigation.reset({index: 0, routes: [{name: 'SuccessSignUp'}]});
+            dispatch(setLoading(false));
+            navigation.reset({index: 0, routes: [{name: 'SignUpSuccess'}]});
           });
       } else {
         storeData('userProfile', user);
         dispatch(setLoading(false));
-        navigation.replace('SignUpSuccess');
+        navigation.reset({index: 0, routes: [{name: 'SignUpSuccess'}]});
       }
     })
     .catch((error) => {

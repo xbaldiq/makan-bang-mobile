@@ -33,15 +33,9 @@ export default {
     });
   },
   getFoods: () => {
-    // const token = await getData('token')
     return apiInstance({
       method: 'GET',
       url: '/food',
-      // headers: {
-      //   Authorization: token,
-      //   'Content-Type': 'multipart/form-data',
-      // },
-      // data,
     });
   },
   getFoodsByTypes: (types) => {
